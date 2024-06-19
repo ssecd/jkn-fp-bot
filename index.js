@@ -69,8 +69,8 @@ server.listen(port, host, () => {
 });
 
 /** @param {number} ms */
-async function sleep(ms) {
-	await new Promise((resolve) => setTimeout(resolve, ms));
+function delay(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function run_bot({ username, password, card_number }) {
@@ -97,7 +97,7 @@ async function run_bot({ username, password, card_number }) {
 	await bot.mouseMove(x, y, 0);
 	await bot.mouseClick('left');
 
-	await sleep(500);
+	await delay(1000);
 
 	// clear and enter the username
 	await bot.send('^a');
@@ -114,7 +114,7 @@ async function run_bot({ username, password, card_number }) {
 	// hit enter key for login
 	await bot.send('{ENTER}');
 
-	await sleep(500);
+	await delay(1500);
 
 	// send card number
 	await bot.send('{TAB}');
