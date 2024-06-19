@@ -87,10 +87,7 @@ async function run_bot({ username, password, card_number }) {
 	// get the position and size of the window
 	const win_pos = await bot.winGetPos(fp_win_title);
 
-	if (!win_pos) {
-		console.error('Failed to get window position');
-		return;
-	}
+	if (!win_pos) throw new Error('Failed to get window position');
 
 	const { top, left } = win_pos;
 
@@ -114,5 +111,15 @@ async function run_bot({ username, password, card_number }) {
 	await bot.send('{BACKSPACE}');
 	await bot.send(password);
 
+	// hit enter key for login
 	await bot.send('{ENTER}');
+
+	await sleep(500);
+
+	// send card number
+	await bot.send('{TAB}');
+	await bot.send(card_number);
+
+	// wait for window to close
+	await bot.winWaitClose(fp_win_title);
 }
