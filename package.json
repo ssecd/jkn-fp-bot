@@ -1,0 +1,30 @@
+{
+	"name": "jkn-fp-api",
+	"description": "JKN finger print API for automated APM",
+	"version": "0.0.1",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node --env-file=.env --watch index.js"
+	},
+	"keywords": [
+		"jkn",
+		"bpjs",
+		"bridging",
+		"vclaim",
+		"apm",
+		"finger-print"
+	],
+	"author": {
+		"name": "Habib Mustofa",
+		"email": "25121822+mustofa-id@users.noreply.github.com",
+		"url": "https://github.com/mustofa-id"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"node-autoit-koffi": "^1.0.5"
+	},
+	"devDependencies": {
+		"@types/node": "^20.14.5"
+	}
+}

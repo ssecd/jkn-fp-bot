@@ -1,0 +1,115 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      node-autoit-koffi:
+        specifier: ^1.0.5
+        version: 1.0.5
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.5
+        version: 20.14.5
+
+packages:
+
+  '@types/node@20.14.5':
+    resolution: {integrity: sha512-aoRR+fJkZT2l0aGOJhuA8frnCSoNX6W7U2mpNq63+BxBIj5BQFt8rHy627kijCmm63ijdSdwvGgpUsU6MBsZZA==}
+
+  debug@4.3.5:
+    resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  get-symbol-from-current-process-h@1.0.2:
+    resolution: {integrity: sha512-syloC6fsCt62ELLrr1VKBM1ggOpMdetX9hTrdW77UQdcApPHLmf7CI7OKcN1c9kYuNxKcDe4iJ4FY9sX3aw2xw==}
+
+  iconv-lite@0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
+    engines: {node: '>=0.10.0'}
+
+  koffi@2.8.9:
+    resolution: {integrity: sha512-Q7ZKiWfPJo3UoaHG1oyWIkEzgaaf5A6HisFiBg9sfG+cTiID+9LzZBnsMzW7hBo5nZktXcHqHXE+4Liw3AU6dQ==}
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
+  ms@2.1.2:
+    resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
+
+  node-addon-api@3.2.1:
+    resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
+
+  node-autoit-koffi@1.0.5:
+    resolution: {integrity: sha512-04oEUElh6TOxugwx5leLK8Z2g57mA65a3YeqINOT+zOL2IHGehM24oBmWE/ttEXVBOcGOViURCJNRO+tPnMV3Q==}
+
+  node-gyp-build@4.8.1:
+    resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
+    hasBin: true
+
+  ref-napi@3.0.3:
+    resolution: {integrity: sha512-LiMq/XDGcgodTYOMppikEtJelWsKQERbLQsYm0IOOnzhwE9xYZC7x8txNnFC9wJNOkPferQI4vD4ZkC0mDyrOA==}
+    engines: {node: '>= 10.0'}
+
+  safer-buffer@2.1.2:
+    resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+snapshots:
+
+  '@types/node@20.14.5':
+    dependencies:
+      undici-types: 5.26.5
+
+  debug@4.3.5:
+    dependencies:
+      ms: 2.1.2
+
+  get-symbol-from-current-process-h@1.0.2: {}
+
+  iconv-lite@0.6.3:
+    dependencies:
+      safer-buffer: 2.1.2
+
+  koffi@2.8.9: {}
+
+  lodash@4.17.21: {}
+
+  ms@2.1.2: {}
+
+  node-addon-api@3.2.1: {}
+
+  node-autoit-koffi@1.0.5:
+    dependencies:
+      iconv-lite: 0.6.3
+      koffi: 2.8.9
+      lodash: 4.17.21
+      ref-napi: 3.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  node-gyp-build@4.8.1: {}
+
+  ref-napi@3.0.3:
+    dependencies:
+      debug: 4.3.5
+      get-symbol-from-current-process-h: 1.0.2
+      node-addon-api: 3.2.1
+      node-gyp-build: 4.8.1
+    transitivePeerDependencies:
+      - supports-color
+
+  safer-buffer@2.1.2: {}
+
+  undici-types@5.26.5: {}
