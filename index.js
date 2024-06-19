@@ -4,8 +4,8 @@ import { createServer } from 'node:http';
 import qs from 'node:querystring';
 import pkg from './package.json' assert { type: 'json' };
 
-const host = `http://localhost`;
-const port = process.env.SERVER_PORT || 3000;
+const host = `127.0.0.1`; // bind the server to the loopback interface so we don't expose it
+const port = Number(process.env.SERVER_PORT) || 3000;
 const fp_win_title = process.env.FP_WIN_TITLE || 'Aplikasi Registrasi Sidik Jari';
 const fp_ins_path = process.env.FP_INS_PATH || 'C:\\Program Files (x86)\\BPJS Kesehatan\\Aplikasi Sidik Jari BPJS Kesehatan\\After.exe';
 
@@ -27,12 +27,10 @@ const server = createServer((req, res) => {
 	}
 
 	try {
-		const url = new URL(req.url || '/', host);
+		const url = new URL(req.url || '/', `http://${host}`);
 		if (url.pathname === '/' && req.method === 'GET') {
 			// service info
-			json(200, {
-				message: `Name: ${pkg.name} \nDescription: ${pkg.description} \nVersion: ${pkg.version}`
-			});
+			json(200, { message: pkg.description });
 		} else if (url.pathname === '/' && req.method === 'POST') {
 			// apm bot service
 			let body = '';
@@ -66,8 +64,8 @@ server.on('error', (err) => {
 	console.error('Server error:', err);
 });
 
-server.listen(port, () => {
-	console.log(`Server running at ${host}:${port}`);
+server.listen(port, host, () => {
+	console.log(`Server running at http://${host}:${port}`);
 });
 
 /** @param {number} ms */
