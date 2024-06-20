@@ -117,7 +117,6 @@ async function run_bot({ username, password, card_number }) {
 	await delay(1500);
 
 	// send card number
-	await bot.send('{TAB}');
 	await bot.send(card_number);
 
 	// wait for window to close
