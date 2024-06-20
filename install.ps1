@@ -1,6 +1,11 @@
 # Define the Node.js LTS version
 $nodeVersion = "20.14.0"
-$nodeLtsUrl = "https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-x64.msi"
+$nodeLtsUrl64 = "https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-x64.msi"
+$nodeLtsUrl32 = "https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-x86.msi"
+
+# Determine if the system is 64-bit or 32-bit
+$is64Bit = [Environment]::Is64BitOperatingSystem
+$nodeLtsUrl = if ($is64Bit) { $nodeLtsUrl64 } else { $nodeLtsUrl32 }
 
 # Function to check if Node.js is installed
 function Check-Nodejs {
@@ -23,7 +28,7 @@ function Get-NodejsVersion {
 
 # Function to install Node.js
 function Install-Nodejs {
-    $installerPath = "$env:TEMP\node-v$nodeVersion-x64.msi"
+    $installerPath = "$env:TEMP\node-v$nodeVersion-$([if ($is64Bit) { 'x64' } else { 'x86' }]).msi"
     Invoke-WebRequest -Uri $nodeLtsUrl -OutFile $installerPath
     Start-Process msiexec.exe -ArgumentList "/i", $installerPath, "/quiet", "/norestart" -Wait
     Remove-Item $installerPath
