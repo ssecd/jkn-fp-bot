@@ -53,6 +53,9 @@ if (Check-Nodejs) {
     Install-Nodejs
 }
 
+# Install only production dependencies
+npm install --production
+
 # Install pm2 globally
 npm install pm2@latest -g
 
