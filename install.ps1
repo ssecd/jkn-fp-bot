@@ -67,6 +67,9 @@ npm install pm2@latest -g
 # Run pm2 command
 pm2 start .\index.js --name jkn-fp-bot --node-args="--env-file=.env"
 
+# Save process list
+pm2 save --force
+
 # Create pm2-startup.bat file
 $batFilePath = "$env:TEMP\pm2-startup.bat"
 $batFileContent = "@echo off`npm2 resurrect`nexit"

@@ -12,34 +12,22 @@ Menggunakan `fetch` JavaScript
 
 ```js
 async function openFingerprint() {
-	const fd = new FormData();
-	fd.set('username', 'username_fp');
-	fd.set('password', 'password_fp');
-	fd.set('card_number', 'no_kartu_bpjs');
-
 	const response = await fetch(`http://localhost:3000`, {
 		method: 'POST',
-		body: fd
+		body: new URLSearchParams({
+			username: 'username-fp',
+			password: 'password-fp',
+			card_number: 'no-kartu-bpjs'
+		})
 	});
 
 	if (response.ok) {
-		// checkFpStatus
+		// Response OK setelah jendela aplikasi sidik jari ditutup
 	} else {
 		const result = await response.json();
 		alert(result.message);
 	}
 }
-```
-
-atau menggunakan `<form />`
-
-```html
-<form action="http://localhost:3000" method="post">
-	<input name="username" value="username_fp" hidden />
-	<input name="password" value="password_fp" hidden />
-	<input name="card_number" value="no_kartu_bpjs" hidden />
-	<button type="submit">Buka Fingerprint</button>
-</form>
 ```
 
 ## Lisensi

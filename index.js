@@ -10,6 +10,11 @@ const fp_win_title = process.env.FP_WIN_TITLE || 'Aplikasi Registrasi Sidik Jari
 const fp_ins_path = process.env.FP_INS_PATH || 'C:\\Program Files (x86)\\BPJS Kesehatan\\Aplikasi Sidik Jari BPJS Kesehatan\\After.exe';
 
 const server = createServer((req, res) => {
+	// allow cors
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'POST');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
 	/** @param {Error} error  */
 	function handle_error(error) {
 		console.error(error);
