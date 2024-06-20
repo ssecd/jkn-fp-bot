@@ -4,7 +4,7 @@ Solusi untuk mesin APM (Anjungan Pendaftaran Mandiri) yang berbasis web agar dap
 
 ## Instalasi
 
-Clone repository ini atau download [Zip](/archive/refs/heads/main.zip) secara manual jika Git belum terpasang. Setelah clone atau download/extract Zip, klik kanan script `install.ps1` lalu pilih `Run with PowerShell` dan tunggu hingga proses instalasi selesai. Jika instalasi berhasil, server bot akan berjalan di port 3000 secara default dan seharusnya dapat di-akses melalui browser di alamat http://localhost:3000.
+Clone repository ini atau download [Zip](https://github.com/mustofa-id/jkn-fp-bot/archive/refs/heads/main.zip) secara manual jika Git belum terpasang. Setelah clone atau download/extract Zip, klik kanan script `install.ps1` lalu pilih `Run with PowerShell` dan tunggu hingga proses instalasi selesai. Jika instalasi berhasil, server bot akan berjalan di port 3000 secara default dan seharusnya dapat di-akses melalui browser di alamat http://localhost:3000.
 
 ## Penggunaan
 
@@ -48,5 +48,5 @@ atau menggunakan `<form />`
 
 ## Lainnya
 
-- [Pemecahan Masalah](/issues?q=is%3Aissue)
-- [Laporkan Bug](/issues/new)
+- [Pemecahan Masalah](https://github.com/mustofa-id/jkn-fp-bot/issues?q=is%3Aissue)
+- [Laporkan Bug](https://github.com/mustofa-id/jkn-fp-bot/issues/new)
