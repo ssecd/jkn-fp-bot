@@ -1,8 +1,8 @@
 # JKN Fingerprint Bot
 
-https://github.com/ssecd/jkn-fp-bot/assets/25121822/41849a3c-ebb6-406d-ae89-120ca3fb9a00
-
 Solusi untuk mesin APM (Anjungan Pendaftaran Mandiri) yang berbasis web agar dapat membuka aplikasi sidik jadi BPJS Kesehatan melalui browser.
+
+https://github.com/ssecd/jkn-fp-bot/assets/25121822/a73610d6-95d6-4726-bb37-b639984b76f2
 
 ## Instalasi
 
