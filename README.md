@@ -4,7 +4,15 @@ Solusi untuk mesin APM (Anjungan Pendaftaran Mandiri) yang berbasis web agar dap
 
 ## Instalasi
 
-Clone repository ini atau download [Zip](https://github.com/mustofa-id/jkn-fp-bot/archive/refs/heads/main.zip) secara manual jika Git belum terpasang. Setelah clone atau download/extract Zip, klik kanan script `install.ps1` lalu pilih `Run with PowerShell` dan tunggu hingga proses instalasi selesai. Jika instalasi berhasil, server bot akan berjalan di port 3000 secara default dan seharusnya dapat di-akses melalui browser di alamat http://localhost:3000.
+Sebelum memulai instalasi, buka **Windows Powershell** lalu ketik perintah berikut:
+
+```ps1
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
+```
+
+Tujuannya untuk mengubah ExecutionPolicy supaya dapat menjalankan script instalasi.
+
+Clone repository ini atau download [Zip](https://github.com/mustofa-id/jkn-fp-bot/archive/refs/heads/main.zip) secara manual jika Git belum terpasang. Setelah clone atau download/extract Zip, klik kanan script `install.ps1` lalu pilih `Run with PowerShell`, jika terdapat prompt terkait Execution Policy, ketik huruf `A` yakni `Yes to All` lalu tunggu hingga proses instalasi selesai. Jika instalasi berhasil, server bot akan berjalan di port 3000 secara default dan seharusnya dapat di-akses melalui browser di alamat http://localhost:3000.
 
 ## Penggunaan
 
@@ -29,6 +37,16 @@ async function openFingerprint() {
 	}
 }
 ```
+
+## Konfigurasi
+
+Konfigurasi tersimpan pada file `.env`, beberapa konfigurasi tersedia diantaranya:
+
+- `SERVER_PORT` Port server default-nya `3000`
+- `FP_WIN_TITLE` Windows title aplikasi sidik jari BPJS default-nya `Aplikasi Registrasi Sidik Jari`
+- `FP_INS_PATH` Lokasi instalasi aplikasi sidik jari BPJS default-nya `C:\\Program Files (x86)\\BPJS Kesehatan\\Aplikasi Sidik Jari BPJS Kesehatan\\After.exe`
+
+Template file konfigurasi dapat di salin dari file [.env.example](./.env.example)
 
 ## Lisensi
 

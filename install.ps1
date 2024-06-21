@@ -7,12 +7,17 @@ $nodeLtsUrl32 = "https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-x86.ms
 $is64Bit = [Environment]::Is64BitOperatingSystem
 $nodeLtsUrl = if ($is64Bit) { $nodeLtsUrl64 } else { $nodeLtsUrl32 }
 
+# Refresh env variables in the current session
+function Refresh-Env-Vars {
+    $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Machine)
+}
+
 # Function to check if Node.js is installed
 function Check-Nodejs {
-    $version = node -v 2>$null
-    if ($version) {
-        return $true
-    } else {
+    try {
+        node -v
+        return $true        
+    } catch {
         return $false
     }
 }
@@ -28,10 +33,13 @@ function Get-NodejsVersion {
 
 # Function to install Node.js
 function Install-Nodejs {
-    $installerPath = "$env:TEMP\node-v$nodeVersion-$([if ($is64Bit) { 'x64' } else { 'x86' }]).msi"
-    Invoke-WebRequest -Uri $nodeLtsUrl -OutFile $installerPath
-    Start-Process msiexec.exe -ArgumentList "/i", $installerPath, "/quiet", "/norestart" -Wait
-    Remove-Item $installerPath
+    $arch = if ($is64Bit) { 'x64' } else { 'x86' }
+    $installerPath = "$env:TEMP\node-v$nodeVersion-$arch.msi"
+    if (-Not (Test-Path $installerPath)) {
+        Invoke-WebRequest -Uri $nodeLtsUrl -OutFile $installerPath
+    }
+    Start-Process msiexec.exe -ArgumentList "/i", $installerPath, "/passive", "/norestart" -Wait
+    Refresh-Env-Vars
 }
 
 # Function to uninstall Node.js
@@ -39,7 +47,7 @@ function Uninstall-Nodejs {
     $nodePath = (Get-Command node).Source
     $uninstallerPath = (Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -like "Node.js*" }).UninstallString
     if ($uninstallerPath) {
-        Start-Process "msiexec.exe" -ArgumentList "/x", $uninstallerPath, "/quiet", "/norestart" -Wait
+        Start-Process "msiexec.exe" -ArgumentList "/x", $uninstallerPath, "/passive", "/norestart" -Wait
     }
 }
 
@@ -59,10 +67,12 @@ if (Check-Nodejs) {
 }
 
 # Install only production dependencies
-npm install --production
+npm install --omit=dev
 
 # Install pm2 globally
 npm install pm2@latest -g
+
+Refresh-Env-Vars
 
 # Run pm2 command
 pm2 start .\index.js --name jkn-fp-bot --node-args="--env-file=.env"
@@ -77,6 +87,7 @@ $batFileContent | Set-Content -Path $batFilePath
 
 # Move the batch file to the Startup folder
 $startupFolder = [System.Environment]::GetFolderPath('Startup')
-Move-Item -Path $batFilePath -Destination $startupFolder
+Move-Item -Path $batFilePath -Destination $startupFolder -Force
 
 Write-Output "Setup completed."
+Read-Host -Prompt "Press Enter to close this window"
