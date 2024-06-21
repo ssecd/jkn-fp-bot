@@ -1,10 +1,12 @@
 # JKN Fingerprint Bot
 
+https://github.com/ssecd/jkn-fp-bot/assets/25121822/41849a3c-ebb6-406d-ae89-120ca3fb9a00
+
 Solusi untuk mesin APM (Anjungan Pendaftaran Mandiri) yang berbasis web agar dapat membuka aplikasi sidik jadi BPJS Kesehatan melalui browser.
 
 ## Instalasi
 
-Sebelum memulai instalasi, buka **Windows Powershell** lalu ketik perintah berikut:
+Sebelum memulai instalasi, buka **Windows Powershell** lalu jalankan perintah berikut:
 
 ```ps1
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
