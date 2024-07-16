@@ -45,7 +45,7 @@ const server = createServer((req, res) => {
 				const username = form_data['username'];
 				const password = form_data['password'];
 				const card_number = form_data['card_number'];
-				const exit = form_data['card_number'] === 'true';
+				const exit = form_data['exit'] === 'true';
 				const wait = form_data['wait'];
 
 				if (!username || !password || !card_number) {
