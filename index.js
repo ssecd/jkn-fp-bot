@@ -46,6 +46,7 @@ const server = createServer((req, res) => {
 				const password = form_data['password'];
 				const card_number = form_data['card_number'];
 				const exit = form_data['card_number'] === 'true';
+				const wait = form_data['wait'];
 
 				if (!username || !password || !card_number) {
 					return json(400, {
@@ -53,7 +54,7 @@ const server = createServer((req, res) => {
 					});
 				}
 
-				run_bot({ username, password, card_number, exit })
+				run_bot({ username, password, card_number, exit, wait })
 					.then(() => json(201))
 					.catch((e) => handle_error(e));
 			});
@@ -79,7 +80,7 @@ function delay(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function run_bot({ username, password, card_number, exit }) {
+async function run_bot({ username, password, card_number, exit, wait }) {
 	// open or activate the application window
 	const already_open = await bot.winExists(fp_win_title);
 	if (!already_open) {
@@ -128,7 +129,7 @@ async function run_bot({ username, password, card_number, exit }) {
 		// hit enter key for login
 		await bot.send('{ENTER}');
 
-		await delay(5_000);
+		await delay(+wait || 3_593);
 	}
 
 	// send card number
