@@ -99,17 +99,21 @@ async function run_bot({ username, password, card_number, exit, wait }) {
 	const win_pos = await bot.winGetPos(fp_win_title);
 	if (!win_pos) throw new Error('Failed to get window position');
 
+	// use top and left positions to calculate absolute points
+	const { top, left } = win_pos;
+
 	// login if window just open up
 	if (already_open) {
+		// focus number input
+		await bot.mouseMove(left + 223, top + 121, 0);
+		await bot.mouseClick('left');
+
+		// clear number input
 		await bot.send('^a');
 		await bot.send('{BACKSPACE}');
 	} else {
-		const { top, left } = win_pos;
-
-		// move the mouse cursor to the calculated absolute position
-		const x = left + 223;
-		const y = top + 179;
-		await bot.mouseMove(x, y, 0);
+		// focus to the first input
+		await bot.mouseMove(left + 223, top + 179, 0);
 		await bot.mouseClick('left');
 
 		await delay(1000);
