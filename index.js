@@ -45,6 +45,7 @@ const server = createServer((req, res) => {
 				const username = form_data['username'];
 				const password = form_data['password'];
 				const card_number = form_data['card_number'];
+				const exit = form_data['card_number'] === 'true';
 
 				if (!username || !password || !card_number) {
 					return json(400, {
@@ -52,7 +53,7 @@ const server = createServer((req, res) => {
 					});
 				}
 
-				run_bot({ username, password, card_number })
+				run_bot({ username, password, card_number, exit })
 					.then(() => json(201))
 					.catch((e) => handle_error(e));
 			});
@@ -78,52 +79,63 @@ function delay(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function run_bot({ username, password, card_number }) {
+async function run_bot({ username, password, card_number, exit }) {
 	// open or activate the application window
-	if (!(await bot.winExists(fp_win_title))) {
+	const already_open = await bot.winExists(fp_win_title);
+	if (!already_open) {
 		await bot.run(fp_ins_path);
 		await bot.winWait(fp_win_title); // wait for the application window to appear
 	}
 
 	await bot.winActivate(fp_win_title); // activate the application window
 	await bot.winWaitActive(fp_win_title); // wait for the application to be in focus
-	await bot.winSetOnTop(fp_win_title, '', 1); // set window on top
+
+	if (exit) {
+		await bot.winSetOnTop(fp_win_title, '', 1); // set window on top
+	}
 
 	// get the position and size of the window
 	const win_pos = await bot.winGetPos(fp_win_title);
-
 	if (!win_pos) throw new Error('Failed to get window position');
 
-	const { top, left } = win_pos;
+	// login if window just open up
+	if (already_open) {
+		await bot.send('^a');
+		await bot.send('{BACKSPACE}');
+	} else {
+		const { top, left } = win_pos;
 
-	// move the mouse cursor to the calculated absolute position
-	const x = left + 223;
-	const y = top + 179;
-	await bot.mouseMove(x, y, 0);
-	await bot.mouseClick('left');
+		// move the mouse cursor to the calculated absolute position
+		const x = left + 223;
+		const y = top + 179;
+		await bot.mouseMove(x, y, 0);
+		await bot.mouseClick('left');
 
-	await delay(1000);
+		await delay(1000);
 
-	// clear and enter the username
-	await bot.send('^a');
-	await bot.send('{BACKSPACE}');
-	await bot.send(username);
+		// clear and enter the username
+		await bot.send('^a');
+		await bot.send('{BACKSPACE}');
+		await bot.send(username);
 
-	await bot.send('{TAB}');
+		await bot.send('{TAB}');
 
-	// clear and enter the password
-	await bot.send('^a');
-	await bot.send('{BACKSPACE}');
-	await bot.send(password);
+		// clear and enter the password
+		await bot.send('^a');
+		await bot.send('{BACKSPACE}');
+		await bot.send(password);
 
-	// hit enter key for login
-	await bot.send('{ENTER}');
+		// hit enter key for login
+		await bot.send('{ENTER}');
 
-	await delay(1500);
+		await delay(5_000);
+	}
 
 	// send card number
 	await bot.send(card_number);
 
-	// wait for window to close
-	await bot.winWaitClose(fp_win_title);
+	if (exit) {
+		// wait for window to close
+		await bot.winWaitClose(fp_win_title);
+	}
 }
