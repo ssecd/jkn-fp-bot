@@ -25,7 +25,9 @@ async function openFingerprint() {
 		body: new URLSearchParams({
 			username: 'username-fp',
 			password: 'password-fp',
-			card_number: 'no-kartu-bpjs'
+			card_number: 'no-kartu-bpjs',
+			exit: true, // wait window for exit (optional, default false)
+			wait: 2_000 // wait for login to completed (optional, default 3_593)
 		})
 	});
 
