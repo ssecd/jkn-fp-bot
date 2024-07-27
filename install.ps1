@@ -74,6 +74,10 @@ npm install pm2@latest -g
 
 Refresh-Env-Vars
 
+if (-not (Test-Path -Path .env)) {
+    Move-Item .ennv.example .env
+}
+
 # Run pm2 command
 pm2 start .\index.js --name jkn-fp-bot --node-args="--env-file=.env"
 
