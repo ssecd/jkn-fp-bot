@@ -75,7 +75,7 @@ npm install pm2@latest -g
 Refresh-Env-Vars
 
 if (-not (Test-Path -Path .env)) {
-    Move-Item .ennv.example .env
+    Move-Item -Path .env.example -Destination .env
 }
 
 # Run pm2 command
